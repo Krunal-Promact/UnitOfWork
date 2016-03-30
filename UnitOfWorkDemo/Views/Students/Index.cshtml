@@ -1,0 +1,34 @@
+﻿@using UnitOfWorkDemo.Models;
+@model List<Student>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Student Lists</h2>
+
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Number
+        </th>
+    </tr>
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>
+                @student.Name
+            </td>
+            <td>
+                @student.Email
+            </td>
+            <td>
+                @student.Number
+            </td>
+        </tr>
+    }
+</table>
