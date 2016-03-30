@@ -147,6 +147,10 @@
     <None Include="scripts\jquery-2.2.2.intellisense.js" />
     <Content Include="scripts\jquery-2.2.2.js" />
     <Content Include="scripts\jquery-2.2.2.min.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Students\Student.cshtml" />
@@ -177,6 +181,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
     <Content Include="scripts\jquery-2.2.2.min.map" />
+    <Content Include="Views\Shared\StudentList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

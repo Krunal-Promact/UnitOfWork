@@ -1,0 +1,56 @@
+﻿@using UnitOfWorkDemo.Models;
+@model List<Student>
+<div id="listStudent">
+    <table class="table table-hover">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Number
+            </th>
+            <th>
+            </th>
+        </tr>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>
+                    @student.Name
+                </td>
+                <td>
+                    @student.Email
+                </td>
+                <td>
+                    @student.Number
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditStudent", new { id = student.Id })  |
+                    @Html.ActionLink("Delete", null, null, new { id = student.Id, @class = "deleteButton", data_name = student.Name })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<script>
+    $(function () {
+        $(".deleteButton").click(function (e) {
+            e.preventDefault();
+            var id = $(this).attr("id");
+            var name = $(this).attr("data-name");
+            if (confirm("Are you sure you want to delete " + name)) {
+                $.ajax({
+                    method: "Post",
+                    url: "/Students/DeleteStudent",
+                    data: { id: id },
+                    success: function (data) {
+                        $("#listStudent").html(data);
+                    }
+                });
+            }
+        });
+    });
+</script>

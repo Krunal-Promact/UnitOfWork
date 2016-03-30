@@ -16,7 +16,7 @@ namespace UnitOfWorkDemo.Models
         /// <summary>
         /// Email Address of Student. Empty string is not allowed.
         /// </summary>
-        [EmailAddress(ErrorMessage = "InValid Email Address")]
+        [EmailAddress(ErrorMessage = "In Valid Email Address")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Email Address is Required")]
         public string Email { get; set; }
 

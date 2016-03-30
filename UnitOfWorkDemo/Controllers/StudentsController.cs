@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using UnitOfWorkDemo.Models;
+using UnitOfWorkDemo.Repository;
 
 namespace UnitOfWorkDemo.Controllers
 {
@@ -8,7 +9,7 @@ namespace UnitOfWorkDemo.Controllers
     {
         #region Private Members
 
-        private UnitOfWorkContext _context;
+        private GenericUnitOfWork _unitOfWork;
 
         #endregion
 
@@ -16,7 +17,7 @@ namespace UnitOfWorkDemo.Controllers
 
         public StudentsController()
         {
-            _context = new UnitOfWorkContext();
+            _unitOfWork = new GenericUnitOfWork();
         }
 
         #endregion
@@ -29,7 +30,7 @@ namespace UnitOfWorkDemo.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            return View(_context.Students.AsNoTracking().ToList());
+            return View(_unitOfWork.Repository<Student>().Get().ToList());
         }
 
         /// <summary>
@@ -47,17 +48,24 @@ namespace UnitOfWorkDemo.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult CreateStudent(Student studnet)
+        public ActionResult CreateStudent([Bind(Exclude = "Id")]Student studnet)
         {
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Repository<Student>().Insert(studnet);
+                _unitOfWork.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Student", studnet);
         }
 
         /// <summary>
         /// Get Method to call edit action
         /// </summary>
+        /// <param name="Id">Id of the Student to be edited</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult EditStudent()
+        public ActionResult EditStudent(int Id)
         {
             return View("Index");
         }
@@ -69,17 +77,26 @@ namespace UnitOfWorkDemo.Controllers
         [HttpPost]
         public ActionResult EditStudent(Student student)
         {
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Repository<Student>().Update(student);
+                _unitOfWork.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Student", student);
         }
 
         /// <summary>
-        /// Post method to delete action
+        /// Post method to delete student
         /// </summary>
-        /// <param name="disposing"></param>
+        /// <param name="id">Id of the Student to be Deleted</param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult DeleteStudent(int id)
+        public PartialViewResult DeleteStudent(int id)
         {
-            return RedirectToAction("Index");
+            _unitOfWork.Repository<Student>().Delete(id);
+            _unitOfWork.SaveChanges();
+            return PartialView("StudentList", _unitOfWork.Repository<Student>().Get());
         }
 
         #endregion
@@ -92,9 +109,9 @@ namespace UnitOfWorkDemo.Controllers
         /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
-            if (_context != null)
+            if (_unitOfWork != null)
             {
-                _context.Dispose();
+                _unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

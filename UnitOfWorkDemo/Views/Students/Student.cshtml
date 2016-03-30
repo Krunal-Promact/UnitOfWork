@@ -5,7 +5,7 @@
 
 <h2>Create a Student</h2>
 
-@using (Html.BeginForm("CreateStudent", "Students", FormMethod.Post, new { }))
+@using (Html.BeginForm("CreateStudent", "Students", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.HiddenFor(m => m.Id)
     <div class="form-group">

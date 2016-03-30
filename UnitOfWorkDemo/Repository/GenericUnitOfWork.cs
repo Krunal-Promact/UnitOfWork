@@ -20,14 +20,7 @@ namespace UnitOfWorkDemo.Repository
         public GenericUnitOfWork()
         {
             context = new UnitOfWorkContext();
-            repositories = new Dictionary<Type, object>();
         }
-
-        #endregion
-
-        #region Public Properties
-
-        public Dictionary<Type, object> repositories = null;
 
         #endregion
 
@@ -40,12 +33,7 @@ namespace UnitOfWorkDemo.Repository
         /// <returns></returns>
         public IRepository<T> Repository<T>() where T : class
         {
-            if (repositories.Keys.Contains(typeof(T)) == true)
-            {
-                return repositories[typeof(T)] as IRepository<T>;
-            }
             IRepository<T> repo = new GenericRepository<T>(context);
-            repositories.Add(typeof(T), repo);
             return repo;
         }
 
