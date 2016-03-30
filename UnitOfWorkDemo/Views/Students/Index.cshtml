@@ -4,31 +4,41 @@
     ViewBag.Title = "Index";
 }
 <h2>Student Lists</h2>
-
-<table class="table table-hover">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Email
-        </th>
-        <th>
-            Number
-        </th>
-    </tr>
-    @foreach (var student in Model)
-    {
+<div style="margin-bottom:10px;">
+    @Html.ActionLink("Add New Student", "CreateStudent", null, new { @class = "btn btn-primary" })
+</div>
+<div>
+    <table class="table table-hover">
         <tr>
-            <td>
-                @student.Name
-            </td>
-            <td>
-                @student.Email
-            </td>
-            <td>
-                @student.Number
-            </td>
+            <th>
+                Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Number
+            </th>
+            <th>
+            </th>
         </tr>
-    }
-</table>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>
+                    @student.Name
+                </td>
+                <td>
+                    @student.Email
+                </td>
+                <td>
+                    @student.Number
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditStudent")  |  
+                    @Html.ActionLink("Delete", "DeleteStudent")
+                </td>
+            </tr>
+        }
+    </table>
+</div>

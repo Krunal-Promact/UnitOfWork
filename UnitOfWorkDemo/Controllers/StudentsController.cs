@@ -32,6 +32,56 @@ namespace UnitOfWorkDemo.Controllers
             return View(_context.Students.AsNoTracking().ToList());
         }
 
+        /// <summary>
+        /// Get Method to return student view to create student
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CreateStudent()
+        {
+            return View("Student");
+        }
+
+        /// <summary>
+        /// Post Method to save student
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CreateStudent(Student studnet)
+        {
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Get Method to call edit action
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult EditStudent()
+        {
+            return View("Index");
+        }
+
+        /// <summary>
+        /// Post method to submit edited data to database
+        /// </summary>
+        /// <param name="disposing"></param>
+        [HttpPost]
+        public ActionResult EditStudent(Student student)
+        {
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Post method to delete action
+        /// </summary>
+        /// <param name="disposing"></param>
+        [HttpPost]
+        public ActionResult DeleteStudent(int id)
+        {
+            return RedirectToAction("Index");
+        }
+
         #endregion
 
         #region IDisposable Methods
@@ -42,7 +92,7 @@ namespace UnitOfWorkDemo.Controllers
         /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
-            if(_context != null)
+            if (_context != null)
             {
                 _context.Dispose();
             }
