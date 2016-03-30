@@ -1,11 +1,16 @@
 ﻿@model UnitOfWorkDemo.Models.Student
 @{
     ViewBag.Title = "CreateStudent";
+    var action = "CreateStudent";
+    if (Model.Id != 0)
+    {
+        action = "EditStudent";
+    }
 }
 
 <h2>Create a Student</h2>
 
-@using (Html.BeginForm("CreateStudent", "Students", FormMethod.Post, new { autocomplete = "off" }))
+@using (Html.BeginForm(action, "Students", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.HiddenFor(m => m.Id)
     <div class="form-group">

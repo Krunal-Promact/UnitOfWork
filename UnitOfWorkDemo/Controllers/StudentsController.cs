@@ -67,7 +67,7 @@ namespace UnitOfWorkDemo.Controllers
         [HttpGet]
         public ActionResult EditStudent(int Id)
         {
-            return View("Index");
+            return View("Student", _unitOfWork.Repository<Student>().GetById(Id));
         }
 
         /// <summary>
