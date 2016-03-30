@@ -11,6 +11,8 @@ namespace UnitOfWorkDemo.Repository
 
         private UnitOfWorkContext context = null;
 
+        private bool disposed = false;
+
         #endregion
 
         #region Constructors
@@ -59,12 +61,21 @@ namespace UnitOfWorkDemo.Repository
 
         #region Dispose Methods
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            disposed = true;
+        }
+
         public void Dispose()
         {
-            if (context != null)
-            {
-                context.Dispose();
-            }
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
