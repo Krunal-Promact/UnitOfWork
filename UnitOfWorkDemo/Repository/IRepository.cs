@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace UnitOfWorkDemo.Repository
 {
-    interface IRepository<T> where T : class
+    public interface IRepository<T> where T : class
     {
         #region Interface methods
 
