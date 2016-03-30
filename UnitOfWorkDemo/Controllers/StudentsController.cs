@@ -30,6 +30,7 @@ namespace UnitOfWorkDemo.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            ViewBag.Name = "Test Passed";
             return View(_unitOfWork.Repository<Student>().Get().ToList());
         }
 
