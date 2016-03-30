@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "CreateStudent";
     var action = "CreateStudent";
-    if (Model.Id != 0)
+    if (Model != null)
     {
         action = "EditStudent";
     }
